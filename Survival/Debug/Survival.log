@@ -1,0 +1,3 @@
+﻿  Survival.cpp
+c:\projects\survival\survival\survival.cpp(32): warning C4244: инициализация: преобразование "sf::Int64" в "float", возможна потеря данных
+  Survival.vcxproj -> C:\projects\Survival\Debug\Survival.exe
