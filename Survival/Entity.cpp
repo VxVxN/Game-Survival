@@ -148,7 +148,8 @@ bool Entity::checkCollisionWithMap()//ф-ция взаимодействия с картой
 		for (int x = getX() / 32; x < (getX() + getWidth()) / 32; x++)//проходимся по тайликам, контактирующим с игроком, то есть по всем квадратикам размера 32*32
 			for (int y = getY() / 32; y < (getY() + getHeight()) / 32; y++)
 			{
-				if (_map->tileMap[z][x][y] == '0' || _map->tileMap[z][x][y] == 'r' || _map->tileMap[z][x][y] == '5' || _map->tileMap[z][x][y] == '6')//если наш квадратик соответствует символу 0 (стена), то проверяем "направление скорости" персонажа:
+				if (_map->tileMap[z][x][y] == '0' || _map->tileMap[z][x][y] == 'r' || _map->tileMap[z][x][y] == '5' || _map->tileMap[z][x][y] == '6' || _map->tileMap[z][x][y] == '7' || 
+					_map->tileMap[z][x][y] == '8')//если наш квадратик соответствует символу 0 (стена), то проверяем "направление скорости" персонажа:
 				{
 					if (getDY() > 0)
 					{

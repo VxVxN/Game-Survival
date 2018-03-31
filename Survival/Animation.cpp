@@ -77,6 +77,10 @@ void Animation::drawAnimationMap(RenderWindow &window)
 				if (_map->tileMap[z][x][y] == '5') _map->sprite[z].setTextureRect(IntRect(0,  416, 32, 32));
 				if (_map->tileMap[z][x][y] == '6') _map->sprite[z].setTextureRect(IntRect(32, 416, 32, 32));
 
+				//////////срубленное дерево//////////////////////
+				if (_map->tileMap[z][x][y] == '7') _map->sprite[z].setTextureRect(IntRect(0, 448, 32, 32));
+				if (_map->tileMap[z][x][y] == '8') _map->sprite[z].setTextureRect(IntRect(32, 448, 32, 32));
+
 				_map->sprite[z].setPosition(x * 32, y * 32);
 				if (z == 1) {
 					window.draw(_player->getSprite()); // на первом слою рисуем персонажа

@@ -241,7 +241,7 @@ void Player::catchFish(float time)
 		}
 		break;
 	case StateObject::UP:
-		if (getMap().tileMap[2][getX() / 32][getY() / 32] == 'r') {
+		if (getMap().tileMap[2][getX() / 32][getY() / 32 - 1] == 'r') {
 			catchFishLambda();
 		}
 		break;
@@ -250,7 +250,7 @@ void Player::catchFish(float time)
 
 void Player::cutDownTree(float time)
 {
-	auto cutDownTreeLambda = [&]()
+	auto cutDownTreeLambda = [&](int x, int y)
 	{
 		_progressBar.setVisible(true);
 		_progressBar.setCoordinate(getX() - _progressBar.getWidth() / 2 + getWidth() / 2, getY() + getHeight());
@@ -258,37 +258,65 @@ void Player::cutDownTree(float time)
 		if (_progressBar.getProgression() == 1) {
 			_wood++;
 			_progressBar.setProgression(0.0);
+			if (getMap().tileMap[2][x][y] == '5') { //меняем дерево на пенёк
+
+				getMap().tileMap[2][x]		[y]		= '7';
+				getMap().tileMap[2][x + 1]	[y]		= '8';
+				getMap().tileMap[2][x]		[y - 1] = ' ';
+				getMap().tileMap[2][x + 1]	[y - 1] = ' ';
+				getMap().tileMap[2][x]		[y - 2] = ' ';
+				getMap().tileMap[2][x + 1]	[y - 2] = ' ';
+			}
+			else if (getMap().tileMap[2][x][y] == '6') {
+
+				getMap().tileMap[2][x]		[y]		= '8';
+				getMap().tileMap[2][x - 1]	[y]		= '7';
+				getMap().tileMap[2][x - 1]	[y]		= ' ';
+				getMap().tileMap[2][x]		[y - 1] = ' ';
+				getMap().tileMap[2][x - 1]	[y - 1] = ' ';
+				getMap().tileMap[2][x]		[y - 2] = ' ';
+				getMap().tileMap[2][x - 1]	[y - 2] = ' ';
+			}
 		}
 	};
 	int shift = 3; // смещение по проверки где есть дерево
+	int x;
+	int y;
 	switch (getState())//реализуем поведение в зависимости от направления. 
 	{
-	shift = 1;
 	case StateObject::RIGHT:
 		for (int i(0); i < shift; i++) {
-			if (getMap().tileMap[2][getX() / 32 + i][getY() / 32] == '5' || getMap().tileMap[2][getX() / 32 + i][getY() / 32] == '6') {
-				cutDownTreeLambda();
+			x = getX() / 32 + i;
+			y = getY() / 32;
+			if (getMap().tileMap[2][x][y] == '5' || getMap().tileMap[2][x][y] == '6') {
+				cutDownTreeLambda(x, y);
 			}
 		}
 		break;
 	case StateObject::LEFT:
 		for (int i(0); i < shift; i++) {
-			if (getMap().tileMap[2][getX() / 32 - i][getY() / 32] == '5' || getMap().tileMap[2][getX() / 32 - i][getY() / 32] == '6') {
-				cutDownTreeLambda();
+			x = getX() / 32 - i;
+			y = getY() / 32;
+			if (getMap().tileMap[2][x][y] == '5' || getMap().tileMap[2][x][y] == '6') {
+				cutDownTreeLambda(x, y);
 			}
 		}
 		break;
 	case StateObject::DOWN:
 		for (int i(0); i < shift; i++) {
-			if (getMap().tileMap[2][getX() / 32][getY() / 32 + i] == '5' || getMap().tileMap[2][getX() / 32][getY() / 32 + i] == '6') {
-				cutDownTreeLambda();
+			x = getX() / 32;
+			y = getY() / 32 + i;
+			if (getMap().tileMap[2][x][y] == '5' || getMap().tileMap[2][x][y] == '6') {
+				cutDownTreeLambda(x, y);
 			}
 		}
 		break;
 	case StateObject::UP:
 		for (int i(0); i < shift; i++) {
-			if (getMap().tileMap[2][getX() / 32][getY() / 32 - i] == '5' || getMap().tileMap[2][getX() / 32][getY() / 32 - i] == '6') {
-				cutDownTreeLambda();
+			x = getX() / 32;
+			y = getY() / 32 - i;
+			if (getMap().tileMap[2][x][y] == '5' || getMap().tileMap[2][x][y] == '6') {
+				cutDownTreeLambda(x, y);
 			}
 		}
 		break;

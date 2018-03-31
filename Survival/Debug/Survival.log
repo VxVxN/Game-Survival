@@ -1,3 +1,33 @@
-﻿  Survival.cpp
-c:\projects\survival\survival\survival.cpp(32): warning C4244: инициализация: преобразование "sf::Int64" в "float", возможна потеря данных
+﻿  Player.cpp
+c:\projects\survival\survival\player.cpp(6): warning C4244: аргумент: преобразование "float" в "unsigned int", возможна потеря данных
+c:\projects\survival\survival\player.cpp(7): warning C4244: аргумент: преобразование "float" в "unsigned int", возможна потеря данных
+c:\projects\survival\survival\player.cpp(32): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+c:\projects\survival\survival\player.cpp(133): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+c:\projects\survival\survival\player.cpp(134): warning C4244: =: преобразование "int" в "float", возможна потеря данных
+c:\projects\survival\survival\player.cpp(135): warning C4244: =: преобразование "int" в "float", возможна потеря данных
+c:\projects\survival\survival\player.cpp(144): warning C4244: =: преобразование "unsigned int" в "float", возможна потеря данных
+c:\projects\survival\survival\player.cpp(146): warning C4244: =: преобразование "unsigned int" в "float", возможна потеря данных
+c:\projects\survival\survival\player.cpp(157): warning C4305: аргумент: усечение из "double" в "float"
+c:\projects\survival\survival\player.cpp(161): warning C4305: аргумент: усечение из "double" в "float"
+c:\projects\survival\survival\player.cpp(165): warning C4305: аргумент: усечение из "double" в "float"
+c:\projects\survival\survival\player.cpp(169): warning C4305: аргумент: усечение из "double" в "float"
+c:\projects\survival\survival\player.cpp(188): warning C4018: <: несоответствие типов со знаком и без знака
+c:\projects\survival\survival\player.cpp(189): warning C4018: <: несоответствие типов со знаком и без знака
+c:\projects\survival\survival\player.cpp(198): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+c:\projects\survival\survival\player.cpp(229): warning C4244: аргумент: преобразование "float" в "const unsigned int", возможна потеря данных
+c:\projects\survival\survival\player.cpp(229): warning C4244: аргумент: преобразование "float" в "::size_t", возможна потеря данных
+c:\projects\survival\survival\player.cpp(234): warning C4244: аргумент: преобразование "float" в "const unsigned int", возможна потеря данных
+c:\projects\survival\survival\player.cpp(234): warning C4244: аргумент: преобразование "float" в "::size_t", возможна потеря данных
+c:\projects\survival\survival\player.cpp(239): warning C4244: аргумент: преобразование "float" в "const unsigned int", возможна потеря данных
+c:\projects\survival\survival\player.cpp(239): warning C4244: аргумент: преобразование "float" в "::size_t", возможна потеря данных
+c:\projects\survival\survival\player.cpp(244): warning C4244: аргумент: преобразование "float" в "const unsigned int", возможна потеря данных
+c:\projects\survival\survival\player.cpp(244): warning C4244: аргумент: преобразование "float" в "::size_t", возможна потеря данных
+c:\projects\survival\survival\player.cpp(289): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+c:\projects\survival\survival\player.cpp(290): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+c:\projects\survival\survival\player.cpp(298): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+c:\projects\survival\survival\player.cpp(299): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+c:\projects\survival\survival\player.cpp(307): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+c:\projects\survival\survival\player.cpp(308): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+c:\projects\survival\survival\player.cpp(316): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+c:\projects\survival\survival\player.cpp(317): warning C4244: =: преобразование "float" в "int", возможна потеря данных
   Survival.vcxproj -> C:\projects\Survival\Debug\Survival.exe
