@@ -49,4 +49,5 @@ private:
 	void setPosition(); 
 	void catchFish(float time);
 	void cutDownTree(float time);
+	void buildBridge();
 };

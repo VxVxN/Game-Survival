@@ -66,7 +66,8 @@ void Animation::drawAnimationMap(RenderWindow &window)
 				}
 
 				if (_map->tileMap[z][x][y] == 'r') _map->sprite[z].setTextureRect(IntRect(96, 672, 32, 32));//рисуем реку
-				if (_map->tileMap[z][x][y] == '0') _map->sprite[z].setTextureRect(IntRect(96,  32, 32, 32));//рисуем стену возле края карты
+				if (_map->tileMap[z][x][y] == '0') _map->sprite[z].setTextureRect(IntRect(96, 32, 32, 32));//рисуем стену возле края карты
+				if (_map->tileMap[z][x][y] == 'b') _map->sprite[z].setTextureRect(IntRect(320, 32, 32, 32));//рисуем мост
 
 				//////////////////дерево////////////////////////////////
 

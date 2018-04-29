@@ -7,7 +7,7 @@ Player::Player(const String file, float width, float height) {
 	setHeight(height);
 
 	setSpeed(0.0);
-	_wood = 0;
+	_wood = 3;
 	_food = 0;
 	setHealth(100);
 	_satiety = 100;  //сытость
@@ -111,7 +111,7 @@ void Player::update(float time)
 	playerSatietyString << (int)_satiety;		
 
 	_text.setString("\tДерево: " + playerWoodString.str() + "\t" + "Еда: " + playerFoodString.str() + "\t" +
-		"Здоровье: " + playerHealthString.str() + "%\t" + "Сытость: " + playerSatietyString.str() + "%");
+					"Здоровье: " + playerHealthString.str() + "%\t" + "Сытость: " + playerSatietyString.str() + "%");
 	_text.setPosition(_view.getCenter().x - _widthWindow / 2, _view.getCenter().y - _heightWindow / 2);//задаем позицию текста
 
 	if (_satiety >= 0) {
@@ -140,10 +140,18 @@ void Player::resetView(int width, int height)
 void Player::getPlayerCoordinateForView() {
 	float tempX = getX(); float tempY = getY();//считываем коорд игрока и проверяем их, чтобы убрать края
 
-	if (getX() < 320) tempX = 320;//убираем из вида левую сторону
-	if (getX() >(getMap().getWidth() - 10) * 32) tempX = (getMap().getWidth() - 10) * 32;//убираем из вида правую сторону
-	if (getY() < 240) tempY = 240;//верхнюю сторону
-	if (getY() >(getMap().getHeight() - 8) * 32) tempY = (getMap().getHeight() - 8) * 32;//нижнюю сторону	
+	if (getX() < 320) { //убираем из вида левую сторону
+		tempX = 320;
+	}
+	if (getX() > (getMap().getWidth() - 10) * 32) { //убираем из вида правую сторону
+		tempX = (getMap().getWidth() - 10) * 32;
+	}
+	if (getY() < 240) { //верхнюю сторону
+		tempY = 240;
+	}
+	if (getY() > (getMap().getHeight() - 8) * 32) { //нижнюю сторону
+		tempY = (getMap().getHeight() - 8) * 32;
+	}
 
 	_view.setCenter(tempX, tempY); //следим за игроком, передавая его координаты. 
 }
@@ -171,7 +179,11 @@ void Player::control(float time)
 		else if (Keyboard::isKeyPressed(Keyboard::Space)) {
 			catchFish(time);
 			cutDownTree(time);
-
+		}
+		else if (Keyboard::isKeyPressed(Keyboard::Num1)) {
+			if (getWood() > 0) {
+				buildBridge();
+			}
 		}
 		if (!_progressBar.getVisible()) {
 			_progressBar.setProgression(0.0);
@@ -187,6 +199,7 @@ void Player::setPosition()
 	while (true) {
 		for (x = 1 + rand() % getMap().getWidth(); x < getMap().getWidth(); x++) {
 			for (y = 1 + rand() % getMap().getHeight(); y < getMap().getHeight(); y++) {
+
 				bool isFreeSpace = true; //проверяет есть свободное место для персонажа на всех словах
 				for (z = 0; z < getMap().getCountLayer(); z++) {
 					if (getMap().tileMap[z][x][y] != ' ') {
@@ -223,25 +236,35 @@ void Player::catchFish(float time)
 			_progressBar.setProgression(0.0);
 		}
 	};
+	int x;
+	int y;
 	switch (getState())//в зависимости от направления ищем реку
 	{
 	case StateObject::RIGHT:
-		if (getMap().tileMap[2][getX() / 32 + 1][getY() / 32] == 'r') {
+		x = getX() / 32 + 1;
+		y = getY() / 32;
+		if (getMap().tileMap[2][x][y] == 'r') {
 			catchFishLambda();
 		}
 		break;
 	case StateObject::LEFT:
-		if (getMap().tileMap[2][getX() / 32 - 1][getY() / 32] == 'r') {
+		x = getX() / 32 - 1;
+		y = getY() / 32;
+		if (getMap().tileMap[2][x][y] == 'r') {
 			catchFishLambda();
 		}
 		break;
 	case StateObject::DOWN:
-		if (getMap().tileMap[2][getX() / 32][getY() / 32 + 1] == 'r') {
+		x = getX() / 32;
+		y = getY() / 32 + 1;
+		if (getMap().tileMap[2][x][y] == 'r') {
 			catchFishLambda();
 		}
 		break;
 	case StateObject::UP:
-		if (getMap().tileMap[2][getX() / 32][getY() / 32 - 1] == 'r') {
+		x = getX() / 32;
+		y = getY() / 32 - 1;
+		if (getMap().tileMap[2][x][y] == 'r') {
 			catchFishLambda();
 		}
 		break;
@@ -261,22 +284,22 @@ void Player::cutDownTree(float time)
 			for (int i(2); i < 4; i++) { // проходим по 2-му и 3-му слою, там деревия
 				if (getMap().tileMap[i][x][y] == '5') { //меняем дерево на пенёк
 
-					getMap().tileMap[i][x][y] = '7';
-					getMap().tileMap[i][x + 1][y] = '8';
-					getMap().tileMap[i][x][y - 1] = ' ';
-					getMap().tileMap[i][x + 1][y - 1] = ' ';
-					getMap().tileMap[i][x][y - 2] = ' ';
-					getMap().tileMap[i][x + 1][y - 2] = ' ';
+					getMap().tileMap[i][x]		[y]		= '7';
+					getMap().tileMap[i][x + 1]	[y]		= '8';
+					getMap().tileMap[i][x]		[y - 1] = ' ';
+					getMap().tileMap[i][x + 1]	[y - 1] = ' ';
+					getMap().tileMap[i][x]		[y - 2] = ' ';
+					getMap().tileMap[i][x + 1]	[y - 2] = ' ';
 				}
 				else if (getMap().tileMap[i][x][y] == '6') {
 
-					getMap().tileMap[i][x][y] = '8';
-					getMap().tileMap[i][x - 1][y] = '7';
-					getMap().tileMap[i][x - 1][y - 1] = ' ';
-					getMap().tileMap[i][x][y - 1] = ' ';
-					getMap().tileMap[i][x - 1][y - 1] = ' ';
-					getMap().tileMap[i][x][y - 2] = ' ';
-					getMap().tileMap[i][x - 1][y - 2] = ' ';
+					getMap().tileMap[i][x]		[y]		= '8';
+					getMap().tileMap[i][x - 1]	[y]		= '7';
+					getMap().tileMap[i][x - 1]	[y - 1] = ' ';
+					getMap().tileMap[i][x]		[y - 1] = ' ';
+					getMap().tileMap[i][x - 1]	[y - 1] = ' ';
+					getMap().tileMap[i][x]		[y - 2] = ' ';
+					getMap().tileMap[i][x - 1]	[y - 2] = ' ';
 				}
 			}
 		}
@@ -332,5 +355,50 @@ void Player::cutDownTree(float time)
 			}
 			break;
 		}
+	}
+}
+
+void Player::buildBridge()
+{
+	int x;
+	int y;
+	switch (getState())//в зависимости от направления ищем реку
+	{
+	case StateObject::RIGHT:
+		x = getX() / 32 + 1;
+		y = getY() / 32;
+		if (getMap().tileMap[2][x][y] == 'r') {
+			getMap().tileMap[0][x][y] = 'b';
+			getMap().tileMap[2][x][y] = ' ';
+			setWood(getWood() - 1);
+		}
+		break;
+	case StateObject::LEFT:
+		x = getX() / 32 - 1;
+		y = getY() / 32;
+		if (getMap().tileMap[2][x][y] == 'r') {
+			getMap().tileMap[0][x][y] = 'b';
+			getMap().tileMap[2][x][y] = ' ';
+			setWood(getWood() - 1);
+		}
+		break;
+	case StateObject::DOWN:
+		x = getX() / 32;
+		y = getY() / 32 + 1;
+		if (getMap().tileMap[2][x][y] == 'r') {
+			getMap().tileMap[0][x][y] = 'b';
+			getMap().tileMap[2][x][y] = ' ';
+			setWood(getWood() - 1);
+		}
+		break;
+	case StateObject::UP:
+		x = getX() / 32;
+		y = getY() / 32 - 1;
+		if (getMap().tileMap[2][x][y] == 'r') {
+			getMap().tileMap[0][x][y] = 'b';
+			getMap().tileMap[2][x][y] = ' ';
+			setWood(getWood() - 1);
+		}
+		break;
 	}
 }
