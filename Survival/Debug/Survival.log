@@ -22,12 +22,12 @@ c:\projects\survival\survival\player.cpp(239): warning C4244: аргумент: 
 c:\projects\survival\survival\player.cpp(239): warning C4244: аргумент: преобразование "float" в "::size_t", возможна потеря данных
 c:\projects\survival\survival\player.cpp(244): warning C4244: аргумент: преобразование "float" в "const unsigned int", возможна потеря данных
 c:\projects\survival\survival\player.cpp(244): warning C4244: аргумент: преобразование "float" в "::size_t", возможна потеря данных
-c:\projects\survival\survival\player.cpp(289): warning C4244: =: преобразование "float" в "int", возможна потеря данных
-c:\projects\survival\survival\player.cpp(290): warning C4244: =: преобразование "float" в "int", возможна потеря данных
-c:\projects\survival\survival\player.cpp(298): warning C4244: =: преобразование "float" в "int", возможна потеря данных
-c:\projects\survival\survival\player.cpp(299): warning C4244: =: преобразование "float" в "int", возможна потеря данных
-c:\projects\survival\survival\player.cpp(307): warning C4244: =: преобразование "float" в "int", возможна потеря данных
-c:\projects\survival\survival\player.cpp(308): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+c:\projects\survival\survival\player.cpp(293): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+c:\projects\survival\survival\player.cpp(294): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+c:\projects\survival\survival\player.cpp(304): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+c:\projects\survival\survival\player.cpp(305): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+c:\projects\survival\survival\player.cpp(315): warning C4244: =: преобразование "float" в "int", возможна потеря данных
 c:\projects\survival\survival\player.cpp(316): warning C4244: =: преобразование "float" в "int", возможна потеря данных
-c:\projects\survival\survival\player.cpp(317): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+c:\projects\survival\survival\player.cpp(326): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+c:\projects\survival\survival\player.cpp(327): warning C4244: =: преобразование "float" в "int", возможна потеря данных
   Survival.vcxproj -> C:\projects\Survival\Debug\Survival.exe

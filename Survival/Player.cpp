@@ -258,67 +258,79 @@ void Player::cutDownTree(float time)
 		if (_progressBar.getProgression() == 1) {
 			_wood++;
 			_progressBar.setProgression(0.0);
-			if (getMap().tileMap[2][x][y] == '5') { //меняем дерево на пенёк
+			for (int i(2); i < 4; i++) { // проходим по 2-му и 3-му слою, там деревия
+				if (getMap().tileMap[i][x][y] == '5') { //меняем дерево на пенёк
 
-				getMap().tileMap[2][x]		[y]		= '7';
-				getMap().tileMap[2][x + 1]	[y]		= '8';
-				getMap().tileMap[2][x]		[y - 1] = ' ';
-				getMap().tileMap[2][x + 1]	[y - 1] = ' ';
-				getMap().tileMap[2][x]		[y - 2] = ' ';
-				getMap().tileMap[2][x + 1]	[y - 2] = ' ';
-			}
-			else if (getMap().tileMap[2][x][y] == '6') {
+					getMap().tileMap[i][x][y] = '7';
+					getMap().tileMap[i][x + 1][y] = '8';
+					getMap().tileMap[i][x][y - 1] = ' ';
+					getMap().tileMap[i][x + 1][y - 1] = ' ';
+					getMap().tileMap[i][x][y - 2] = ' ';
+					getMap().tileMap[i][x + 1][y - 2] = ' ';
+				}
+				else if (getMap().tileMap[i][x][y] == '6') {
 
-				getMap().tileMap[2][x]		[y]		= '8';
-				getMap().tileMap[2][x - 1]	[y]		= '7';
-				getMap().tileMap[2][x - 1]	[y]		= ' ';
-				getMap().tileMap[2][x]		[y - 1] = ' ';
-				getMap().tileMap[2][x - 1]	[y - 1] = ' ';
-				getMap().tileMap[2][x]		[y - 2] = ' ';
-				getMap().tileMap[2][x - 1]	[y - 2] = ' ';
+					getMap().tileMap[i][x][y] = '8';
+					getMap().tileMap[i][x - 1][y] = '7';
+					getMap().tileMap[i][x - 1][y - 1] = ' ';
+					getMap().tileMap[i][x][y - 1] = ' ';
+					getMap().tileMap[i][x - 1][y - 1] = ' ';
+					getMap().tileMap[i][x][y - 2] = ' ';
+					getMap().tileMap[i][x - 1][y - 2] = ' ';
+				}
 			}
 		}
 	};
-	int shift = 3; // смещение по проверки где есть дерево
+	int shift = 2; // смещение для проверки где есть дерево
 	int x;
 	int y;
-	switch (getState())//реализуем поведение в зависимости от направления. 
-	{
-	case StateObject::RIGHT:
-		for (int i(0); i < shift; i++) {
-			x = getX() / 32 + i;
-			y = getY() / 32;
-			if (getMap().tileMap[2][x][y] == '5' || getMap().tileMap[2][x][y] == '6') {
-				cutDownTreeLambda(x, y);
+	for (int j(2); j < 4; j++) {  // проходим по 2-му и 3-му слою, там деревия
+		switch (getState())//реализуем поведение в зависимости от направления. 
+		{
+		case StateObject::RIGHT:
+			for (int i(0); i < shift; i++) {
+				for (int k(0); k < shift; k++) { 
+					x = getX() / 32 + i;
+					y = getY() / 32 + k;
+					if (getMap().tileMap[j][x][y] == '5' || getMap().tileMap[j][x][y] == '6') {
+						cutDownTreeLambda(x, y);
+					}
+				}
 			}
-		}
-		break;
-	case StateObject::LEFT:
-		for (int i(0); i < shift; i++) {
-			x = getX() / 32 - i;
-			y = getY() / 32;
-			if (getMap().tileMap[2][x][y] == '5' || getMap().tileMap[2][x][y] == '6') {
-				cutDownTreeLambda(x, y);
+			break;
+		case StateObject::LEFT:
+			for (int i(0); i < shift; i++) {
+				for (int k(0); k < shift; k++) {
+					x = getX() / 32 - i;
+					y = getY() / 32 + k;
+					if (getMap().tileMap[j][x][y] == '5' || getMap().tileMap[j][x][y] == '6') {
+						cutDownTreeLambda(x, y);
+					}
+				}
 			}
-		}
-		break;
-	case StateObject::DOWN:
-		for (int i(0); i < shift; i++) {
-			x = getX() / 32;
-			y = getY() / 32 + i;
-			if (getMap().tileMap[2][x][y] == '5' || getMap().tileMap[2][x][y] == '6') {
-				cutDownTreeLambda(x, y);
+			break;
+		case StateObject::DOWN:
+			for (int i(0); i < shift; i++) {
+				for (int k(0); k < shift; k++) {
+					x = getX() / 32 + k;
+					y = getY() / 32 + i;
+					if (getMap().tileMap[j][x][y] == '5' || getMap().tileMap[j][x][y] == '6') {
+						cutDownTreeLambda(x, y);
+					}
+				}
 			}
-		}
-		break;
-	case StateObject::UP:
-		for (int i(0); i < shift; i++) {
-			x = getX() / 32;
-			y = getY() / 32 - i;
-			if (getMap().tileMap[2][x][y] == '5' || getMap().tileMap[2][x][y] == '6') {
-				cutDownTreeLambda(x, y);
+			break;
+		case StateObject::UP:
+			for (int i(0); i < shift; i++) {
+				for (int k(0); k < shift; k++) {
+					x = getX() / 32 + k;
+					y = getY() / 32 - i;
+					if (getMap().tileMap[j][x][y] == '5' || getMap().tileMap[j][x][y] == '6') {
+						cutDownTreeLambda(x, y);
+					}
+				}
 			}
+			break;
 		}
-		break;
 	}
 }
