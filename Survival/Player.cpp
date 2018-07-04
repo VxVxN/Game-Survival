@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "Player.h"
 
-Player::Player(const String file, float width, float height) {  
-	setFile(file);
+Player::Player(const String strFile, float width, float height) {
+	setFile(strFile);
 	setWidth(width); 
 	setHeight(height);
 
@@ -13,12 +13,11 @@ Player::Player(const String file, float width, float height) {
 	_satiety = 100;  //сытость
 	setLife(true);
 
-	_image.loadFromFile(getFile());
-	getTexture().loadFromImage(_image);
+	imageLoadFromFile(strFile);
+	getTexture().loadFromImage(getImage());
 
 	getSprite().setTexture(getTexture());
 	getSprite().setTextureRect(IntRect(0, 0, getWidth(), getHeight())); 
-
 
 	_font.loadFromFile("CyrilicOld.ttf");
 	_text.setFont(_font);

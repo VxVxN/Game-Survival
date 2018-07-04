@@ -21,6 +21,16 @@ const String Entity::getFile() const
 	return _file;
 }
 
+void Entity::imageLoadFromFile(const String &strFile)
+{
+	_image.loadFromFile(strFile);
+}
+
+Image Entity::getImage() const
+{
+	return _image;
+};
+
 Texture & Entity::getTexture()
 {
 	return _texture;

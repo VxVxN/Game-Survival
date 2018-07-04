@@ -12,20 +12,20 @@ using namespace sf;
 class Player : public Entity
 {
 public:
-
-	Player(const String file, float width, float height);
+	Player() = delete;
+	Player(const String strFile, float width, float height);
 
 	View getView() const;
 
 	Text getText() const;
 
-	void setWood(unsigned int wood);
+	void setWood(unsigned int);
 	int getWood() const;
 
-	void setFood(unsigned int food);
+	void setFood(unsigned int);
 	int getFood() const;
 
-	void setSatiety(float satiety);
+	void setSatiety(float);
 	float getSatiety() const;
 
 	void drawProgressBar(RenderWindow &window);
@@ -34,7 +34,6 @@ public:
 	void resetView(int width, int height);
 
 private:
-	Image _image;
 	Text _text;
 	Font _font;
 	ProgressBar _progressBar;

@@ -17,6 +17,9 @@ public:
 	void setFile(const String &strFile);
 	const String getFile() const;
 
+	void imageLoadFromFile(const String &strFile);
+	Image getImage() const;
+
 	Texture & getTexture();
 
 	void setState(StateObject state);
@@ -60,6 +63,7 @@ public:
 private:
 	Sprite _sprite;
 	String _file; 
+	Image _image;
 	Texture _texture;
 	StateObject _state;
 	Map * _map;

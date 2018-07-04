@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Исходные файлы\Entity">
+      <UniqueIdentifier>{a6ede28b-f6d1-4d2e-9803-202312064004}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Entity">
+      <UniqueIdentifier>{d32eebfe-7aca-47a5-9272-18be03ac0349}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -24,17 +30,20 @@
     <ClInclude Include="Map.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="ProgressBar.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Файлы заголовков\Entity</Filter>
+    </ClInclude>
     <ClInclude Include="Entity.h">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>Файлы заголовков\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Chicken.h">
+      <Filter>Файлы заголовков\Entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -47,9 +56,6 @@
     <ClCompile Include="Map.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="Animation.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -57,7 +63,13 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Исходные файлы\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Исходные файлы\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Chicken.cpp">
+      <Filter>Исходные файлы\Entity</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
