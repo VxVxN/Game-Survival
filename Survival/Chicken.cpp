@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Chicken.h"
 
-Chicken::Chicken(const String strFile, float width, float height)
+Chicken::Chicken(const String strFile, float x, float y, float width, float height)
 {
 	setFile(strFile);
 	setWidth(width);
@@ -15,15 +15,15 @@ Chicken::Chicken(const String strFile, float width, float height)
 	getTexture().loadFromImage(getImage());
 
 	getSprite().setTexture(getTexture());
-	getSprite().setTextureRect(IntRect(0, 0, getWidth(), getHeight()));
+	getSprite().setTextureRect(IntRect(x, y, getWidth(), getHeight()));
 
 	srand(time(0)); // автоматическая рандомизация
 }
 
 void Chicken::update(float time)
 {
-	setX(32 * 3);
-	setY(32 * 3);
+	setX(32);
+	setY(32);
 
 	switch (getState())//реализуем поведение в зависимости от направления.
 	{

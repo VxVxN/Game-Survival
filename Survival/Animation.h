@@ -2,6 +2,7 @@
 
 #include "Player.h"
 #include "map.h"
+#include "Entity.h"
 
 class Animation
 {

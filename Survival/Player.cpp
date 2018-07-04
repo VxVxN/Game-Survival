@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Player.h"
 
-Player::Player(const String strFile, float width, float height) {
+Player::Player(const String strFile, float x, float y, float width, float height) {
 	setFile(strFile);
 	setWidth(width); 
 	setHeight(height);
@@ -17,7 +17,7 @@ Player::Player(const String strFile, float width, float height) {
 	getTexture().loadFromImage(getImage());
 
 	getSprite().setTexture(getTexture());
-	getSprite().setTextureRect(IntRect(0, 0, getWidth(), getHeight())); 
+	getSprite().setTextureRect(IntRect(x, y, getWidth(), getHeight())); 
 
 	_font.loadFromFile("CyrilicOld.ttf");
 	_text.setFont(_font);

@@ -13,7 +13,7 @@ class Player : public Entity
 {
 public:
 	Player() = delete;
-	Player(const String strFile, float width, float height);
+	Player(const String strFile, float x, float y, float width, float height);
 
 	View getView() const;
 

@@ -9,7 +9,7 @@ class Chicken :	public Entity
 {
 public:
 	Chicken() = delete;
-	Chicken(const String file, float width, float height);
+	Chicken(const String file, float x, float y, float width, float height);
 
 	void update(float time);
 
