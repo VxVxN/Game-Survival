@@ -27,7 +27,7 @@ Player::Player(const String strFile, float x, float y, float width, float height
 
 	_progressBar.create(50, 50, 75, 20, sf::Color::Black, sf::Color::Red);
 	_progressBar.setProgression(0.0);
-
+	
 	srand(time(0)); // автоматическая рандомизация
 }
 
@@ -196,12 +196,11 @@ void Player::setPosition()
 	int y = 0;
 	int z = 0;
 	while (true) {
-		for (x = 1 + rand() % getMap().getWidth(); x < getMap().getWidth(); x++) {
+		for (x = 1 + rand() % getMap().getWidth() - 1; x < getMap().getWidth(); x++) {
 			for (y = 1 + rand() % getMap().getHeight(); y < getMap().getHeight(); y++) {
-
 				bool isFreeSpace = true; //проверяет есть свободное место для персонажа на всех словах
 				for (z = 0; z < getMap().getCountLayer(); z++) {
-					if (getMap().tileMap[z][x][y] != ' ') {
+					if (getMap().tileMap.at(z).at(x)[y] != ' ') {
 						isFreeSpace = false;
 					}
 				}
@@ -211,11 +210,11 @@ void Player::setPosition()
 					break;
 				}
 			}
-			if (getMap().tileMap[z][x][y] == ' ') {
+			if (getMap().tileMap.at(z).at(x)[y] == ' ') {
 				break;
 			}
 		}
-		if (getMap().tileMap[z][x][y] == ' ') {
+		if (getMap().tileMap.at(z).at(x)[y] == ' ') {
 			break;
 		}
 	}
@@ -242,28 +241,28 @@ void Player::catchFish(float time)
 	case StateObject::RIGHT:
 		x = getX() / 32 + 1;
 		y = getY() / 32;
-		if (getMap().tileMap[2][x][y] == 'r') {
+		if (getMap().tileMap.at(2).at(x)[y] == 'r') {
 			catchFishLambda();
 		}
 		break;
 	case StateObject::LEFT:
 		x = getX() / 32 - 1;
 		y = getY() / 32;
-		if (getMap().tileMap[2][x][y] == 'r') {
+		if (getMap().tileMap.at(2).at(x)[y] == 'r') {
 			catchFishLambda();
 		}
 		break;
 	case StateObject::DOWN:
 		x = getX() / 32;
 		y = getY() / 32 + 1;
-		if (getMap().tileMap[2][x][y] == 'r') {
+		if (getMap().tileMap.at(2).at(x)[y] == 'r') {
 			catchFishLambda();
 		}
 		break;
 	case StateObject::UP:
 		x = getX() / 32;
 		y = getY() / 32 - 1;
-		if (getMap().tileMap[2][x][y] == 'r') {
+		if (getMap().tileMap.at(2).at(x)[y] == 'r') {
 			catchFishLambda();
 		}
 		break;
@@ -283,22 +282,22 @@ void Player::cutDownTree(float time)
 			for (int i(2); i < 4; i++) { // проходим по 2-му и 3-му слою, там деревия
 				if (getMap().tileMap[i][x][y] == '5') { //меняем дерево на пенёк
 
-					getMap().tileMap[i][x]		[y]		= '7';
-					getMap().tileMap[i][x + 1]	[y]		= '8';
-					getMap().tileMap[i][x]		[y - 1] = ' ';
-					getMap().tileMap[i][x + 1]	[y - 1] = ' ';
-					getMap().tileMap[i][x]		[y - 2] = ' ';
-					getMap().tileMap[i][x + 1]	[y - 2] = ' ';
+					getMap().tileMap.at(i).at(x)	[y]		= '7';
+					getMap().tileMap.at(i).at(x + 1)[y]		= '8';
+					getMap().tileMap.at(i).at(x)	[y - 1] = ' ';
+					getMap().tileMap.at(i).at(x + 1)[y - 1] = ' ';
+					getMap().tileMap.at(i).at(x)	[y - 2] = ' ';
+					getMap().tileMap.at(i).at(x + 1)[y - 2] = ' ';
 				}
 				else if (getMap().tileMap[i][x][y] == '6') {
 
-					getMap().tileMap[i][x]		[y]		= '8';
-					getMap().tileMap[i][x - 1]	[y]		= '7';
-					getMap().tileMap[i][x - 1]	[y - 1] = ' ';
-					getMap().tileMap[i][x]		[y - 1] = ' ';
-					getMap().tileMap[i][x - 1]	[y - 1] = ' ';
-					getMap().tileMap[i][x]		[y - 2] = ' ';
-					getMap().tileMap[i][x - 1]	[y - 2] = ' ';
+					getMap().tileMap.at(i).at(x)	[y]		= '8';
+					getMap().tileMap.at(i).at(x - 1)[y]		= '7';
+					getMap().tileMap.at(i).at(x - 1)[y - 1] = ' ';
+					getMap().tileMap.at(i).at(x)	[y - 1] = ' ';
+					getMap().tileMap.at(i).at(x - 1)[y - 1] = ' ';
+					getMap().tileMap.at(i).at(x)	[y - 2] = ' ';
+					getMap().tileMap.at(i).at(x - 1)[y - 2] = ' ';
 				}
 			}
 		}
@@ -306,7 +305,7 @@ void Player::cutDownTree(float time)
 	int shift = 2; // смещение для проверки где есть дерево
 	int x;
 	int y;
-	for (int j(2); j < 4; j++) {  // проходим по 2-му и 3-му слою, там деревия
+	for (int z(2); z < 4; z++) {  // проходим по 2-му и 3-му слою, там деревия
 		switch (getState())//реализуем поведение в зависимости от направления. 
 		{
 		case StateObject::RIGHT:
@@ -314,7 +313,7 @@ void Player::cutDownTree(float time)
 				for (int k(0); k < shift; k++) { 
 					x = getX() / 32 + i;
 					y = getY() / 32 + k;
-					if (getMap().tileMap[j][x][y] == '5' || getMap().tileMap[j][x][y] == '6') {
+					if (getMap().tileMap.at(z).at(x)[y] == '5' || getMap().tileMap.at(z).at(x)[y] == '6') {
 						cutDownTreeLambda(x, y);
 					}
 				}
@@ -325,7 +324,7 @@ void Player::cutDownTree(float time)
 				for (int k(0); k < shift; k++) {
 					x = getX() / 32 - i;
 					y = getY() / 32 + k;
-					if (getMap().tileMap[j][x][y] == '5' || getMap().tileMap[j][x][y] == '6') {
+					if (getMap().tileMap.at(z).at(x)[y] == '5' || getMap().tileMap.at(z).at(x)[y] == '6') {
 						cutDownTreeLambda(x, y);
 					}
 				}
@@ -336,7 +335,7 @@ void Player::cutDownTree(float time)
 				for (int k(0); k < shift; k++) {
 					x = getX() / 32 + k;
 					y = getY() / 32 + i;
-					if (getMap().tileMap[j][x][y] == '5' || getMap().tileMap[j][x][y] == '6') {
+					if (getMap().tileMap.at(z).at(x)[y] == '5' || getMap().tileMap.at(z).at(x)[y] == '6') {
 						cutDownTreeLambda(x, y);
 					}
 				}
@@ -347,7 +346,7 @@ void Player::cutDownTree(float time)
 				for (int k(0); k < shift; k++) {
 					x = getX() / 32 + k;
 					y = getY() / 32 - i;
-					if (getMap().tileMap[j][x][y] == '5' || getMap().tileMap[j][x][y] == '6') {
+					if (getMap().tileMap.at(z).at(x)[y] == '5' || getMap().tileMap.at(z).at(x)[y] == '6') {
 						cutDownTreeLambda(x, y);
 					}
 				}
@@ -366,36 +365,40 @@ void Player::buildBridge()
 	case StateObject::RIGHT:
 		x = getX() / 32 + 1;
 		y = getY() / 32;
-		if (getMap().tileMap[2][x][y] == 'r') {
-			getMap().tileMap[0][x][y] = 'b';
-			getMap().tileMap[2][x][y] = ' ';
+
+		if (getMap().tileMap.at(2).at(x)[y] == 'r') {
+			getMap().tileMap.at(0).at(x)[y] = 'b';
+			getMap().tileMap.at(2).at(x)[y] = ' ';
 			setWood(getWood() - 1);
 		}
 		break;
 	case StateObject::LEFT:
 		x = getX() / 32 - 1;
 		y = getY() / 32;
-		if (getMap().tileMap[2][x][y] == 'r') {
-			getMap().tileMap[0][x][y] = 'b';
-			getMap().tileMap[2][x][y] = ' ';
+
+		if (getMap().tileMap.at(2).at(x)[y] == 'r') {
+			getMap().tileMap.at(0).at(x)[y] = 'b';
+			getMap().tileMap.at(2).at(x)[y] = ' ';
 			setWood(getWood() - 1);
 		}
 		break;
 	case StateObject::DOWN:
 		x = getX() / 32;
 		y = getY() / 32 + 1;
-		if (getMap().tileMap[2][x][y] == 'r') {
-			getMap().tileMap[0][x][y] = 'b';
-			getMap().tileMap[2][x][y] = ' ';
+
+		if (getMap().tileMap.at(2).at(x)[y] == 'r') {
+			getMap().tileMap.at(0).at(x)[y] = 'b';
+			getMap().tileMap.at(2).at(x)[y] = ' ';
 			setWood(getWood() - 1);
 		}
 		break;
 	case StateObject::UP:
 		x = getX() / 32;
 		y = getY() / 32 - 1;
-		if (getMap().tileMap[2][x][y] == 'r') {
-			getMap().tileMap[0][x][y] = 'b';
-			getMap().tileMap[2][x][y] = ' ';
+
+		if (getMap().tileMap.at(2).at(x)[y] == 'r') {
+			getMap().tileMap.at(0).at(x)[y] = 'b';
+			getMap().tileMap.at(2).at(x)[y] = ' ';
 			setWood(getWood() - 1);
 		}
 		break;

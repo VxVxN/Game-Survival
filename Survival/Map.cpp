@@ -113,8 +113,7 @@ void Map::generationRiver(int layer)
 		if (x > _width || y > _height) {
 			break;
 		}
-
-		tileMap[layer][x][y] = 'r';
+		tileMap.at(layer).at(x)[y] = 'r';
 		bool isRandom = rand() % 2;
 		if (x == xEndRiver) {
 			isRandom = 0;
@@ -139,7 +138,7 @@ void Map::generationRiver(int layer)
 			}
 		}
 	}
-	tileMap[layer][xEndRiver][yEndRiver] = 'r';
+	tileMap.at(layer).at(xEndRiver)[yEndRiver] = 'r';
 }
 
 void Map::generationForest(int layer)
@@ -157,7 +156,7 @@ void Map::generationForest(int layer)
 
 		for (int x = randomX; x < (randomX + width); x++) {
 			for (int y = randomY; y < (randomY + height); y++) {
-				if (tileMap[layer][x][y] != ' ') {
+				if (tileMap.at(layer).at(x)[y] != ' ') {
 					isFreeSpace = false;
 				}
 			}
@@ -167,44 +166,44 @@ void Map::generationForest(int layer)
 			///////////////////для примера
 			int x = randomX, y = randomY;
 			x += 0; y += 1;
-			tileMap[layer][x][y] = '1';
-			tileMap[layer][x + 1][y] = '2';
-			tileMap[layer][x][y + 1] = '3';
-			tileMap[layer][x + 1][y + 1] = '4';
-			tileMap[layer][x][y + 2] = '5';
-			tileMap[layer][x + 1][y + 2] = '6';
+			tileMap.at(layer).at(x)		[y]		= '1';
+			tileMap.at(layer).at(x + 1)	[y]		= '2';
+			tileMap.at(layer).at(x)		[y + 1] = '3';
+			tileMap.at(layer).at(x + 1)	[y + 1] = '4';
+			tileMap.at(layer).at(x)		[y + 2] = '5';
+			tileMap.at(layer).at(x + 1)	[y + 2] = '6';
 			x = randomX, y = randomY;
 			x += 2; y += 0;
-			tileMap[layer][x][y] = '1';
-			tileMap[layer][x + 1][y] = '2';
-			tileMap[layer][x][y + 1] = '3';
-			tileMap[layer][x + 1][y + 1] = '4';
-			tileMap[layer][x][y + 2] = '5';
-			tileMap[layer][x + 1][y + 2] = '6';
+			tileMap.at(layer).at(x)		[y]		= '1';
+			tileMap.at(layer).at(x + 1)	[y]		= '2';
+			tileMap.at(layer).at(x)		[y + 1] = '3';
+			tileMap.at(layer).at(x + 1)	[y + 1] = '4';
+			tileMap.at(layer).at(x)		[y + 2] = '5';
+			tileMap.at(layer).at(x + 1)	[y + 2] = '6';
 			x = randomX, y = randomY;
 			x += 1; y += 2;
-			tileMap[layer + 1][x][y] = '1';
-			tileMap[layer + 1][x + 1][y] = '2';
-			tileMap[layer + 1][x][y + 1] = '3';
-			tileMap[layer + 1][x + 1][y + 1] = '4';
-			tileMap[layer + 1][x][y + 2] = '5';
-			tileMap[layer + 1][x + 1][y + 2] = '6';
+			tileMap.at(layer + 1).at(x)		[y]		= '1';
+			tileMap.at(layer + 1).at(x + 1)	[y]		= '2';
+			tileMap.at(layer + 1).at(x)		[y + 1] = '3';
+			tileMap.at(layer + 1).at(x + 1)	[y + 1] = '4';
+			tileMap.at(layer + 1).at(x)		[y + 2] = '5';
+			tileMap.at(layer + 1).at(x + 1)	[y + 2] = '6';
 			x = randomX, y = randomY;
 			x += 3; y += 2;
-			tileMap[layer + 1][x][y] = '1';
-			tileMap[layer + 1][x + 1][y] = '2';
-			tileMap[layer + 1][x][y + 1] = '3';
-			tileMap[layer + 1][x + 1][y + 1] = '4';
-			tileMap[layer + 1][x][y + 2] = '5';
-			tileMap[layer + 1][x + 1][y + 2] = '6';
+			tileMap.at(layer + 1).at(x)		[y]		= '1';
+			tileMap.at(layer + 1).at(x + 1)	[y]		= '2';
+			tileMap.at(layer + 1).at(x)		[y + 1] = '3';
+			tileMap.at(layer + 1).at(x + 1)	[y + 1] = '4';
+			tileMap.at(layer + 1).at(x)		[y + 2] = '5';
+			tileMap.at(layer + 1).at(x + 1)	[y + 2] = '6';
 			x = randomX, y = randomY;
 			x += 4; y += 1;
-			tileMap[layer][x][y] = '1';
-			tileMap[layer][x + 1][y] = '2';
-			tileMap[layer][x][y + 1] = '3';
-			tileMap[layer][x + 1][y + 1] = '4';
-			tileMap[layer][x][y + 2] = '5';
-			tileMap[layer][x + 1][y + 2] = '6';
+			tileMap.at(layer).at(x)		[y]		= '1';
+			tileMap.at(layer).at(x + 1)	[y]		= '2';
+			tileMap.at(layer).at(x)		[y + 1] = '3';
+			tileMap.at(layer).at(x + 1)	[y + 1] = '4';
+			tileMap.at(layer).at(x)		[y + 2] = '5';
+			tileMap.at(layer).at(x + 1)	[y + 2] = '6';
 			break;
 		}
 	}
