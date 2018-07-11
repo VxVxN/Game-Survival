@@ -9,10 +9,12 @@ class Chicken :	public Entity
 {
 public:
 	Chicken() = delete;
-	Chicken(const String file, float x, float y, float width, float height);
+	Chicken(const String strFile, const float x, const float y, const float width, const float height);
 
-	void update(float time);
+	void update(const float time);
 
 	~Chicken();
+private:
+	void setPosition() override final;
 };
 

@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Chicken.h"
 
-Chicken::Chicken(const String strFile, float x, float y, float width, float height)
+Chicken::Chicken(const String strFile, const float x, const float y, const float width, const float height)
 {
 	setFile(strFile);
 	setWidth(width);
@@ -20,23 +20,20 @@ Chicken::Chicken(const String strFile, float x, float y, float width, float heig
 	srand(time(0)); // автоматическая рандомизация
 }
 
-void Chicken::update(float time)
+void Chicken::update(const float time)
 {
-	setX(32);
-	setY(32);
+	//switch (getState())//реализуем поведение в зависимости от направления.
+	//{
+	//case StateObject::RIGHT: setDX(getSpeed());		setDY(0);			break;
+	//case StateObject::LEFT:	 setDX(-getSpeed());	setDY(0);			break;
+	//case StateObject::DOWN:	 setDX(0);				setDY(getSpeed());	break;
+	//case StateObject::UP:	 setDX(0);				setDY(-getSpeed());	break;
+	//}
 
-	switch (getState())//реализуем поведение в зависимости от направления.
-	{
-	case StateObject::RIGHT: setDX(getSpeed());		setDY(0);			break;
-	case StateObject::LEFT:	 setDX(-getSpeed());	setDY(0);			break;
-	case StateObject::DOWN:	 setDX(0);				setDY(getSpeed());	break;
-	case StateObject::UP:	 setDX(0);				setDY(-getSpeed());	break;
-	}
+	//setX(getX() + getDX() * time);
+	//setY(getY() + getDY() * time);
 
-	setX(getX() + getDX() * time);
-	setY(getY() + getDY() * time);
-
-	setSpeed(0);//зануляем скорость, чтобы персонаж остановился.
+	//setSpeed(0);//зануляем скорость, чтобы персонаж остановился.
 	getSprite().setPosition(getX(), getY());
 
 	checkCollisionWithMap();//ф-ция взаимодействия с картой
@@ -48,4 +45,36 @@ void Chicken::update(float time)
 
 Chicken::~Chicken()
 {
+}
+
+/////////////private//////////
+
+void Chicken::setPosition()
+{
+	int x = 0;
+	int y = 0;
+	int z = 0;
+	while (true) {
+		for (x = 1 + rand() % getMap().getWidth() - 1; x < getMap().getWidth(); x++) {
+			for (y = 1 + rand() % getMap().getHeight(); y < getMap().getHeight(); y++) {
+				bool isFreeSpace = true; //проверяет есть свободное место для персонажа на всех словах
+				for (z = 0; z < getMap().getCountLayer(); z++) {
+					if (getMap().tileMap.at(z).at(x)[y] != ' ') {
+						isFreeSpace = false;
+					}
+				}
+				z--;
+				if (isFreeSpace) {
+					setX(x * 32); setY(y * 32);//координата появления спрайта
+					break;
+				}
+			}
+			if (getMap().tileMap.at(z).at(x)[y] == ' ') {
+				break;
+			}
+		}
+		if (getMap().tileMap.at(z).at(x)[y] == ' ') {
+			break;
+		}
+	}
 }

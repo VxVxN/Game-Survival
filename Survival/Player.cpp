@@ -90,7 +90,7 @@ void Player::update(float time)
 	}
 
 	setX(getX() + getDX() * time);
-	setY(getY() + getDY() * time);
+	setY(getY() + getDY() * time); 
 
 	setSpeed(0);//зануляем скорость, чтобы персонаж остановился.
 	getSprite().setPosition(getX(), getY());

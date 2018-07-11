@@ -16,8 +16,15 @@ void Animation::setPlayer(Player &player)
 	_player = &player;
 }
 
+void Animation::setEntity(Entity *entity)
+{
+	entity->setMap(*_map);
+	_listEntities.push_back(entity);
+}
+
 void Animation::draw(RenderWindow &window, float &time)
 {
+	(*_listEntities.begin())->update(time);
 	drawAnimationPlayer(time);
 	drawAnimationMap(window);
 }
@@ -85,6 +92,10 @@ void Animation::drawAnimationMap(RenderWindow &window)
 				_map->sprite[z].setPosition(x * 32, y * 32);
 				if (z == 1) {
 					window.draw(_player->getSprite()); // на первом слою рисуем персонажа
+
+					for (auto & entity : _listEntities) {
+						window.draw((*entity).getSprite());
+					}
 				}
 				else {
 					window.draw(_map->sprite[z]); // а на остальных рисуем карту
